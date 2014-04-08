@@ -23,28 +23,28 @@ $arrclientes = $arrclientes['output']['response'];
 <!DOCTYPE html>
 <html>
     <head>
-	<?php include 'include/generic_head.php'; ?>
+        <?php include 'include/generic_head.php'; ?>
     </head>
     <body>
         <header>
-	    <?php
-	    include 'include/generic_header.php';
-	    ?>
+            <?php
+            include 'include/generic_header.php';
+            ?>
         </header>
         <section id="section_wrap">
-	    <?php
-	    $_ACTIVE_SIDEBAR = 'clientes';
-	    include 'include/generic_navbar.php';
-	    ?>
+            <?php
+            $_ACTIVE_SIDEBAR = 'clientes';
+            include 'include/generic_navbar.php';
+            ?>
             <div class="container">
-		<h2>Clientes</h2>
-		<?php
-		if ($create) {
-		    ?>
-    		<a href="#" id="crearcliente" class="btn btn-info botoncrear">Crear</a>
-		    <?php
-		}
-		?>
+                <h2>Clientes</h2>
+                <?php
+                //if ($create) {
+                ?>
+                <a href="#" id="crearcliente" class="btn btn-info botoncrear">Crear</a>
+                <?php
+                //}
+                ?>
                 <div>
                     <table class="table table-hover dyntable" id="dynamictable">
                         <thead>
@@ -63,78 +63,122 @@ $arrclientes = $arrclientes['output']['response'];
                         </colgroup>
 <!--                                    <td class="con0"><a href="#" onclick="editdata();"><span class="ui-icon ui-icon-pencil"></span></a><a href="#"><span class="ui-icon ui-icon-trash"></span></a></td>-->
                         <tbody>
-			    <?php
-			    $c = count($arrclientes);
-			    if ($isvalid) {
-				for ($i = 0; $i < $c; $i++) {
-				    ?>
-				    <tr class="gradeC">
-					<td class="con0">
-					    <?php
-					    //if ($delete) {
-						?>
-	    				    <a href="#" onclick="CLIENTE.editdata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-pencil"></span></a>
-						<?php
-					   // }
-					    //if ($edit) {
-						?>
-	    				    <a href="#" onclick="CLIENTE.deletedata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-trash"></span></a>
-						<?php
-					    //}
-					    ?>
-					    <a href="#" onclick="CLIENTE.showdata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-eye-open"></span></a>
+                            <?php
+                            $c = count($arrclientes);
+                            if ($isvalid) {
+                                for ($i = 0; $i < $c; $i++) {
+                                    ?>
+                                    <tr class="gradeC">
+                                        <td class="con0">
+                                            <?php
+                                            //if ($delete) {
+                                            ?>
+                                            <a href="#" onclick="CLIENTE.editdata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-pencil"></span></a>
+                                            <?php
+                                            // }
+                                            //if ($edit) {
+                                            ?>
+                                            <a href="#" onclick="CLIENTE.deletedata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-trash"></span></a>
+                                            <?php
+                                            //}
+                                            ?>
+                                            <a href="#" onclick="CLIENTE.showdata(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-eye-open"></span></a>
                                             <a href="#" onclick="CLIENTE.showcontact(<?php echo $arrclientes[$i]['id']; ?>);"><span class="icon-list-alt"></span></a>
-					</td>
-					<td class="con1"><?php echo $arrclientes[$i]['nombre']; ?></td>
-					<td class="con0"><?php echo $arrclientes[$i]['nit']; ?></td>
-					<td class="con1"><?php echo $arrclientes[$i]['telefono']; ?></td>
-				    </tr>
-				    <?php
-				}
-			    }
-			    ?>
+                                        </td>
+                                        <td class="con1"><?php echo $arrclientes[$i]['nombre']; ?></td>
+                                        <td class="con0"><?php echo $arrclientes[$i]['nit']; ?></td>
+                                        <td class="con1"><?php echo $arrclientes[$i]['telefono']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>	    
         </section>
         <footer id="footer_wrap">
-	    <?php include 'include/generic_footer.php'; ?>
+            <?php include 'include/generic_footer.php'; ?>
         </footer>
         <div id="dialog-form" title="Cliente" style="display: none;">
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
-                <div class="control-group">
-                    <label class="control-label">Nombre</label>
-                    <div class="controls"><input type="text" name="nombre" id="nombre" class="text ui-widget-content ui-corner-all" /></div>
+                <div class="alinear"  style="width: 45%; display: inline-block; vertical-align: top;"  id="divform">
+                    <div class="control-group">
+                        <label class="control-label">Nombre</label>
+                        <div class="controls"><input type="text" name="nombre" id="nombre" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email</label>
+                        <div class="controls"><input type="email" name="email" id="email" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">NIT</label>
+                        <div class="controls"><input type="text" name="nit" id="nit" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefono</label>
+                        <div class="controls"><input type="text" name="telefono" id="telefono" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">País</label>
+                        <div class="controls"><input type="text" name="pais" id="pais" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Departamento</label>
+                        <div class="controls"><input type="text" name="departamento" id="departamento" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ciudad</label>
+                        <div class="controls"><input type="text" name="ciudad" id="ciudad" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Dirección</label>
+                        <div class="controls"><input type="text" name="direccion" id="direccion" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Email</label>
-                    <div class="controls"><input type="email" name="email" id="email" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">NIT</label>
-                    <div class="controls"><input type="text" name="nit" id="nit" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Telefono</label>
-                    <div class="controls"><input type="text" name="telefono" id="telefono" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">País</label>
-                    <div class="controls"><input type="text" name="pais" id="pais" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Departamento</label>
-                    <div class="controls"><input type="text" name="departamento" id="departamento" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Ciudad</label>
-                    <div class="controls"><input type="text" name="ciudad" id="ciudad" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Dirección</label>
-                    <div class="controls"><input type="text" name="direccion" id="direccion" class="text ui-widget-content ui-corner-all" /></div>
+
+                <div class="alinear" style="width: 45%; display: inline-block; vertical-align: top;" id="divform2">
+                    <div class="control-group">
+                        <label class="control-label">Sector</label>
+                        <div class="controls"><input type="text" name="sector" id="sector" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Promotor</label>
+                        <div class="controls">
+                            <select name="idpromotor" id="idpromotor" class="text ui-widget-content ui-corner-all">
+                                <option value="seleccione">Seleccione promotor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tiene Matriz CES</label>
+                        <div class="controls">
+                            <select onchange="CLIENTE.hideshowDim('No');" name="matrizces" id="matrizces" class="text ui-widget-content ui-corner-all">
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="divsector" class="control-group">
+                        <label class="control-label">Sector</label>
+                        <div class="controls">
+                            <select name="sector" id="sector" class="text ui-widget-content ui-corner-all">
+                                <option value="seleccione">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tiene Universidad</label>
+                        <div class="controls">
+                            <select name="univ" id="univ" class="text ui-widget-content ui-corner-all">
+                                <option value="seleccione">Seleccione</option>
+                                <option value="si">Si</option>
+                                <option value="si">No</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -142,41 +186,74 @@ $arrclientes = $arrclientes['output']['response'];
         <div id="dialog-formsc" title="Cliente" style="display: none;">
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
-                <div class="control-group">
-                    <label class="control-label">Nombre</label>
-                    <div class="controls"><input readonly type="text" name="nombresc" id="nombresc" class="text ui-widget-content ui-corner-all" /></div>
+                <div class="alinear"  style="width: 45%; display: inline-block; vertical-align: top;"  id="divform">
+                    <div class="control-group">
+                        <label class="control-label">Nombre</label>
+                        <div class="controls"><input readonly type="text" name="nombresc" id="nombresc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email</label>
+                        <div class="controls"><input readonly type="email" name="emailsc" id="emailsc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">NIT</label>
+                        <div class="controls"><input readonly type="text" name="nitsc" id="nitsc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefono</label>
+                        <div class="controls"><input readonly type="text" name="telefonosc" id="telefonosc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">País</label>
+                        <div class="controls"><input readonly type="text" name="paissc" id="paissc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Departamento</label>
+                        <div class="controls"><input readonly type="text" name="departamentosc" id="departamentosc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ciudad</label>
+                        <div class="controls"><input readonly type="text" name="ciudadsc" id="ciudadsc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Dirección</label>
+                        <div class="controls"><input readonly type="text" name="direccionsc" id="direccionsc" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Email</label>
-                    <div class="controls"><input readonly type="email" name="emailsc" id="emailsc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">NIT</label>
-                    <div class="controls"><input readonly type="text" name="nitsc" id="nitsc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Telefono</label>
-                    <div class="controls"><input readonly type="text" name="telefonosc" id="telefonosc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">País</label>
-                    <div class="controls"><input readonly type="text" name="paissc" id="paissc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Departamento</label>
-                    <div class="controls"><input readonly type="text" name="departamentosc" id="departamentosc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Ciudad</label>
-                    <div class="controls"><input readonly type="text" name="ciudadsc" id="ciudadsc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Dirección</label>
-                    <div class="controls"><input readonly type="text" name="direccionc" id="direccionsc" class="text ui-widget-content ui-corner-all" /></div>
+
+                <div class="alinear"  style="width: 45%; display: inline-block; vertical-align: top;"  id="divform">
+                    <div class="control-group">
+                        <label class="control-label">Sector</label>
+                        <div class="controls"><input readonly type="text" name="sector" id="sector" class="text ui-widget-content ui-corner-all" /></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Promotor</label>
+                        <div class="controls">
+                            <div class="controls"><input readonly type="text" name="idpromotorsc" id="idpromotorsc" class="text ui-widget-content ui-corner-all" /></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tiene Matriz CES</label>
+                        <div class="controls">
+                            <div class="controls"><input readonly type="text" name="matrizcessc" id="matrizcessc" class="text ui-widget-content ui-corner-all" /></div>
+                        </div>
+                    </div>
+                    <div id="divsector" class="control-group">
+                        <label class="control-label">Sector</label>
+                        <div class="controls">
+                            <div class="controls"><input readonly type="text" name="sectorsc" id="sectorsc" class="text ui-widget-content ui-corner-all" /></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tiene Universidad</label>
+                        <div class="controls">
+                            <div class="controls"><input readonly type="text" name="univsc" id="univsc" class="text ui-widget-content ui-corner-all" /></div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
-        
+
         <div id="dialog-form-contact" title="Contactos Clientes" style="display: none;">
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate-crear">
@@ -205,7 +282,7 @@ $arrclientes = $arrclientes['output']['response'];
                 </div>
             </form>
         </div>
-        
+
         <div id="dialog-form-crear-cont" title="Crear Contacto" style="display: none;">
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
@@ -221,7 +298,7 @@ $arrclientes = $arrclientes['output']['response'];
                     <label class="control-label">Email</label>
                     <div class="controls"><input type="email"  id="emailc" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
-                 <div class="control-group">
+                <div class="control-group">
                     <label class="control-label">Identificación</label>
                     <div class="controls"><input type="text"  id="identificacionc" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
@@ -237,10 +314,10 @@ $arrclientes = $arrclientes['output']['response'];
                     <label class="control-label">Celular</label>
                     <div class="controls"><input type="text"  id="celularc" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
-           
+
             </form>
         </div>
-        
+
         <div id="dialog-form-ver-cont" title="Contacto" style="display: none;">
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
@@ -256,7 +333,7 @@ $arrclientes = $arrclientes['output']['response'];
                     <label class="control-label">Email</label>
                     <div class="controls"><input readonly type="email"  id="emailcv" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
-                 <div class="control-group">
+                <div class="control-group">
                     <label class="control-label">Identificación</label>
                     <div class="controls"><input readonly type="text"  id="identificacioncv" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
@@ -272,15 +349,15 @@ $arrclientes = $arrclientes['output']['response'];
                     <label class="control-label">Celular</label>
                     <div class="controls"><input readonly type="text"  id="celularcv" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
-           
+
             </form>
         </div>
-        
 
-	<?php include 'include/generic_script.php'; ?>
+
+        <?php include 'include/generic_script.php'; ?>
         <link rel="stylesheet" media="screen" href="css/dynamictable.css" type="text/css" />
         <script type="text/javascript" src="js/jquery/jquery-dataTables.js"></script>
         <script type="text/javascript" src="js/clientes.js"></script>
-      
+
     </body>
 </html>

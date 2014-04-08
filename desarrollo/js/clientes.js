@@ -14,19 +14,19 @@ function initcliente() {
     nombre = $("#nombre");
     allFields = $([]).add(nombre);
     tips = $(".validateTips");
-    
-    
+
+
     $('#dynamictable').dataTable({
         "sPaginationType": "full_numbers"
     });
-    
+
     $("#crearcliente").button().click(function() {
         q.id = 0;
         $("#dialog-form").dialog("open");
     });
 
     $("#dialog-form").dialog({
-        autoOpen: false, height: 600, width: 450, modal: true,
+        autoOpen: false, height: 570, width: 850, modal: true,
         buttons: {
             "Guardar": function() {
                 var bValid = true;
@@ -46,7 +46,7 @@ function initcliente() {
         }
     });
     $("#dialog-formsc").dialog({
-        autoOpen: false, height: 600, width: 450, modal: true,
+        autoOpen: false, height: 570, width: 850, modal: true,
         buttons: {
             "Cancelar": function() {
                 $(this).dialog("close");
@@ -60,7 +60,7 @@ function initcliente() {
     $("#dialog-form-contact").dialog({
         autoOpen: false, height: 480, width: 950, modal: true,
         buttons: {
-            "Nuevo": function(){
+            "Nuevo": function() {
                 $("#dialog-form-crear-cont").dialog("open");
             },
             "Cancelar": function() {
@@ -73,138 +73,150 @@ function initcliente() {
             updateTips('');
         }
     });
-    
+
     $("#dialog-form-crear-cont").dialog({
-	autoOpen: false, 
-	height: 580, 
-	width: 450, 
-	modal: true,
-	buttons: {
-	    "Guardar": function() {
-		var bValid = true;
-		allFields.removeClass("ui-state-error");
-		//bValid = bValid && checkLength(nombre, "nombre", 3, 16);
-		//if ("seleccione" == $("#idcli").val()){
-		  //  bValid = false;
-		    //updateTips('Seleccione el cliente al cual pertenece el usuario.');
-		//}
-		if (bValid) {
-		    CLIENTE.savecontact();
-		//$(this).dialog("close");
-		}
-	    },
-	    "Cancelar": function() {
-		UTIL.clearForm('formcreate1');
-		UTIL.clearForm('formcreate2');
-		$(this).dialog("close");
-	    }
-	},
-	close: function() {
-	    UTIL.clearForm('formcreate1');
-	    UTIL.clearForm('formcreate2');
-	    updateTips('');
-	}
+        autoOpen: false,
+        height: 580,
+        width: 450,
+        modal: true,
+        buttons: {
+            "Guardar": function() {
+                var bValid = true;
+                allFields.removeClass("ui-state-error");
+                //bValid = bValid && checkLength(nombre, "nombre", 3, 16);
+                //if ("seleccione" == $("#idcli").val()){
+                //  bValid = false;
+                //updateTips('Seleccione el cliente al cual pertenece el usuario.');
+                //}
+                if (bValid) {
+                    CLIENTE.savecontact();
+                    //$(this).dialog("close");
+                }
+            },
+            "Cancelar": function() {
+                UTIL.clearForm('formcreate1');
+                UTIL.clearForm('formcreate2');
+                $(this).dialog("close");
+            }
+        },
+        close: function() {
+            UTIL.clearForm('formcreate1');
+            UTIL.clearForm('formcreate2');
+            updateTips('');
+        }
     });
-    
+
     $("#dialog-form-ver-cont").dialog({
-	autoOpen: false, 
-	height: 580, 
-	width: 450, 
-	modal: true,
-	buttons: {
-	    "Cancelar": function() {
-		UTIL.clearForm('formcreate1');
-		UTIL.clearForm('formcreate2');
-		$(this).dialog("close");
-	    }
-	},
-	close: function() {
-	    UTIL.clearForm('formcreate1');
-	    UTIL.clearForm('formcreate2');
-	    updateTips('');
-	}
+        autoOpen: false,
+        height: 580,
+        width: 450,
+        modal: true,
+        buttons: {
+            "Cancelar": function() {
+                UTIL.clearForm('formcreate1');
+                UTIL.clearForm('formcreate2');
+                $(this).dialog("close");
+            }
+        },
+        close: function() {
+            UTIL.clearForm('formcreate1');
+            UTIL.clearForm('formcreate2');
+            updateTips('');
+        }
     });
 }
 
 var CLIENTE = {
-    editcont: function (id){
-         c={};
-         idcont=id; 
-         c.ke = _ucode;
-         c.lu = _ulcod;
-         c.ti = _utval;
-         c.op = 'contactget';
-	 c.id = id;
-         c.idcli = idcliente;
-         band = 1;//Para que envíe el id en save data y no lo guarde como uno nuevo sino que lo edite
-         debugger;
-	 UTIL.callAjaxRqst(c, this.editconthandler);
+    hideshowDim: function(Mostrar) {
+        if (Mostrar == "No") {
+            show = '';
+        } else if (Mostrar == "Si") {
+            show = 's';
+        }
+        if ($('#matrizces' + show).val() == 'No') {
+            $('#divsector' + show).hide();
+        } else {
+            $('#divsector' + show).show();
+        }
+    },
+    editcont: function(id) {
+        c = {};
+        idcont = id;
+        c.ke = _ucode;
+        c.lu = _ulcod;
+        c.ti = _utval;
+        c.op = 'contactget';
+        c.id = id;
+        c.idcli = idcliente;
+        band = 1;//Para que envíe el id en save data y no lo guarde como uno nuevo sino que lo edite
+        debugger;
+        UTIL.callAjaxRqst(c, this.editconthandler);
     },
     editconthandler: function(data) {
-	UTIL.cursorNormal();
+        UTIL.cursorNormal();
         if (data.output.valid) {
-	    //idcont='';
+            //idcont='';
             var res = data.output.response[0];
             //$('#idclisu').val(res.idcli);
-	    $('#nombrec').val(res.nombre);
-	    $('#apellidoc').val(res.apellido);
-	    $('#emailc').val(res.email);
-	    $('#identificacionc').val(res.identificacion);
-	    $('#celularc').val(res.celular);
+            $('#nombrec').val(res.nombre);
+            $('#apellidoc').val(res.apellido);
+            $('#emailc').val(res.email);
+            $('#identificacionc').val(res.identificacion);
+            $('#celularc').val(res.celular);
             $('#cargoc').val(res.cargo);
-	    $('#telefonoc').val(res.telefono);
-	    $("#dialog-form-crear-cont").dialog("open");
-	} else {
-	    //alert('Error: ' + data.output.response.content);
-	}
+            $('#telefonoc').val(res.telefono);
+            $("#dialog-form-crear-cont").dialog("open");
+        } else {
+            //alert('Error: ' + data.output.response.content);
+        }
     },
-    showcont: function (id){
-         c={};
-         c.ke = _ucode;
-         c.lu = _ulcod;
-         c.ti = _utval;
-         c.op = 'contactget';
-	 c.id = id;
-         c.idcli = idcliente;
-         debugger;
-	 UTIL.callAjaxRqst(c, this.showconthandler);
+    showcont: function(id) {
+        c = {};
+        c.ke = _ucode;
+        c.lu = _ulcod;
+        c.ti = _utval;
+        c.op = 'contactget';
+        c.id = id;
+        c.idcli = idcliente;
+        debugger;
+        UTIL.callAjaxRqst(c, this.showconthandler);
     },
     showconthandler: function(data) {
-	UTIL.cursorNormal();
+        UTIL.cursorNormal();
         if (data.output.valid) {
-	    var res = data.output.response[0];
+            var res = data.output.response[0];
             //$('#idclisu').val(res.idcli);
-	    $('#nombrecv').val(res.nombre);
-	    $('#apellidocv').val(res.apellido);
-	    $('#emailcv').val(res.email);
-	    $('#identificacioncv').val(res.identificacion);
-	    $('#celularcv').val(res.celular);
+            $('#nombrecv').val(res.nombre);
+            $('#apellidocv').val(res.apellido);
+            $('#emailcv').val(res.email);
+            $('#identificacioncv').val(res.identificacion);
+            $('#celularcv').val(res.celular);
             $('#cargocv').val(res.cargo);
-	    $('#telefonocv').val(res.telefono);
-	    $("#dialog-form-ver-cont").dialog("open");
-	} else {
-	    //alert('Error: ' + data.output.response.content);
-	}
+            $('#telefonocv').val(res.telefono);
+            $("#dialog-form-ver-cont").dialog("open");
+        } else {
+            //alert('Error: ' + data.output.response.content);
+        }
     },
-    deletecont: function(id){
+    deletecont: function(id) {
         var continuar = confirm('Va a eliminar información de forma irreversible.\n¿Desea continuar?');
-	if (continuar) {
-	    c={};
+        if (continuar) {
+            c = {};
             c.ke = _ucode;
             c.lu = _ulcod;
             c.ti = _utval;
             c.op = 'usrdelete';
-	    c.id = id;
-	    UTIL.callAjaxRqst(c, this.deleteconthandler);
-	}  
+            c.id = id;
+            UTIL.callAjaxRqst(c, this.deleteconthandler);
+        }
     },
     deleteconthandler: function(data) {
-	UTIL.cursorNormal();
-	if (data.output.valid) {
-	    window.location = 'clientes.php';
-	} else {
-	    //alert('Error: ' + data.output.response.content);
-	}
+        UTIL.cursorNormal();
+        if (data.output.valid) {
+            window.location = 'clientes.php';
+        } else {
+            //alert('Error: ' + data.output.response.content);
+        }
     },
     savecontact: function() {
         c = {};
@@ -213,36 +225,36 @@ var CLIENTE = {
         c.ti = _utval;
         c.contacto = 'si';
         c.op = 'usrsave';
-	c.idcli = idcliente;
-        if(band == 1){
+        c.idcli = idcliente;
+        if (band == 1) {
             c.id = idcont;
-            idcont="";
+            idcont = "";
             band = 0;
-        }else{
-            c.id ="";
+        } else {
+            c.id = "";
         }
-	c.nombre = $('#nombrec').val();
-	c.apellido = $('#apellidoc').val();
-	c.cargo = $('#cargoc').val();
-	c.email = $('#emailc').val();
-	c.identificacion = $('#identificacionc').val();
-	c.celular = $('#celularc').val();
-	c.telefono = $('#telefonoc').val();
+        c.nombre = $('#nombrec').val();
+        c.apellido = $('#apellidoc').val();
+        c.cargo = $('#cargoc').val();
+        c.email = $('#emailc').val();
+        c.identificacion = $('#identificacionc').val();
+        c.celular = $('#celularc').val();
+        c.telefono = $('#telefonoc').val();
         debugger;
-	UTIL.callAjaxRqst(c, this.savecontacthandler);
+        UTIL.callAjaxRqst(c, this.savecontacthandler);
     },
     savecontacthandler: function(data) {
-	UTIL.cursorNormal();
-        bandContacto=0;
-	if (data.output.valid) {
-	    updateTips('Información guardada correctamente');
-	    window.location = 'clientes.php';
-	} else {
-	    updateTips('Error: ' + data.output.response.content);
-	}
+        UTIL.cursorNormal();
+        bandContacto = 0;
+        if (data.output.valid) {
+            updateTips('Información guardada correctamente');
+            window.location = 'clientes.php';
+        } else {
+            updateTips('Error: ' + data.output.response.content);
+        }
     },
-    showcontact: function(id){
-        idcliente=id;
+    showcontact: function(id) {
+        idcliente = id;
         c = {};
         c.ke = _ucode;
         c.lu = _ulcod;
@@ -250,66 +262,66 @@ var CLIENTE = {
         c.op = 'contactget';
         c.idcli = id;
         debugger;
-	UTIL.callAjaxRqst(c, this.showcontacthandler);
+        UTIL.callAjaxRqst(c, this.showcontacthandler);
     },
-    showcontacthandler: function(data){
+    showcontacthandler: function(data) {
         UTIL.cursorNormal();
-	if (data.output.valid) {
-	    var res = data.output.response;
-	    contactos = res;
-            var cont='';
-	    debugger;
-            for (var i in res){
-		cont+='<tr class="gradeC">\n\
-                            <td class="con0">\n\
-                                <a href="#" onclick= "CLIENTE.editcont('+contactos[i]['id']+')"><span class="icon-pencil"></span></a>\n\
-                                <a href="#" onclick= "CLIENTE.deletecont('+contactos[i]['id']+')"><span class="icon-trash"></span></a>\n\
-                                <a href="#" onclick= "CLIENTE.showcont('+contactos[i]['id']+')"><span class="icon-eye-open"></span></a>\n\
-                            </td>\n\
-                            <td class="con1">'+contactos[i]['identificacion']+'</td>\n\
-                            <td class="con0">'+contactos[i]['nombre']+' '+contactos[i]['apellido']+'</td>\n\
-                            <td class="con1">'+contactos[i]['telefono']+' / '+contactos[i]['celular']+'</td>\n\
-                            <td class="con0">'+contactos[i]['email']+'</td>\n\
-                       </tr>';
-	    }
+        if (data.output.valid) {
+            var res = data.output.response;
+            contactos = res;
+            var cont = '';
             debugger;
-	   $("#dialog-form-contact").dialog("open");
-            $("#mostrar_contactos").empty();
-	    $("#mostrar_contactos").append(cont);
-            if(bTabla == 0){
-                $('#dynamictablecontact').dataTable({
-                "sPaginationType": "full_numbers"
-                 });
-                 bTabla = 1;
+            for (var i in res) {
+                cont += '<tr class="gradeC">\n\
+                            <td class="con0">\n\
+                                <a href="#" onclick= "CLIENTE.editcont(' + contactos[i]['id'] + ')"><span class="icon-pencil"></span></a>\n\
+                                <a href="#" onclick= "CLIENTE.deletecont(' + contactos[i]['id'] + ')"><span class="icon-trash"></span></a>\n\
+                                <a href="#" onclick= "CLIENTE.showcont(' + contactos[i]['id'] + ')"><span class="icon-eye-open"></span></a>\n\
+                            </td>\n\
+                            <td class="con1">' + contactos[i]['identificacion'] + '</td>\n\
+                            <td class="con0">' + contactos[i]['nombre'] + ' ' + contactos[i]['apellido'] + '</td>\n\
+                            <td class="con1">' + contactos[i]['telefono'] + ' / ' + contactos[i]['celular'] + '</td>\n\
+                            <td class="con0">' + contactos[i]['email'] + '</td>\n\
+                       </tr>';
             }
-	} else {
-	    debugger;
-            if(data.output.response.content == ' Sin resultados.'){
+            debugger;
+            $("#dialog-form-contact").dialog("open");
+            $("#mostrar_contactos").empty();
+            $("#mostrar_contactos").append(cont);
+            if (bTabla == 0) {
+                $('#dynamictablecontact').dataTable({
+                    "sPaginationType": "full_numbers"
+                });
+                bTabla = 1;
+            }
+        } else {
+            debugger;
+            if (data.output.response.content == ' Sin resultados.') {
                 ////alert(data.output.response.content);
-                aviso='<tr class="gradeC">\n\
+                aviso = '<tr class="gradeC">\n\
                             <td class="con0"></td>\n\
                             <td class="con1">Sin Contactos</td>\n\
                             <td class="con0"></td>\n\
                             <td class="con1"></td>\n\
                             <td class="con0"></td>\n\
-                       </tr>';  
+                       </tr>';
                 $("#dialog-form-contact").dialog("open");
                 $("#mostrar_contactos").empty();
                 $("#mostrar_contactos").append(aviso);
-                
-                if(bTabla == 0){
-                $('#dynamictablecontact').dataTable({
-                "sPaginationType": "full_numbers"
-                 });
-                 bTabla = 1;
-            }
-            }else{
+
+                if (bTabla == 0) {
+                    $('#dynamictablecontact').dataTable({
+                        "sPaginationType": "full_numbers"
+                    });
+                    bTabla = 1;
+                }
+            } else {
                 //alert('Error: ' + data.output.response.content);
             }
-	}
+        }
 
     },
-    showdata: function(id){
+    showdata: function(id) {
         q.op = 'cliget';
         q.id = id;
         debugger;
@@ -371,7 +383,6 @@ var CLIENTE = {
             //alert('Error: ' + data.output.response.content);
         }
     },
-        
     savedata: function() {
         q.op = 'clisave';
         q.nombre = $('#nombre').val();

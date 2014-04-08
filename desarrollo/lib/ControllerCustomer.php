@@ -55,11 +55,11 @@ class ControllerCustomer {
         $id = 0;
         if ($this->id > 0) {
             //actualiza la informacion
-            $q = "SELECT cli_id FROM mzt_cliente WHERE cli_id = " . $this->id;
+            $q = "SELECT cli_id FROM ass_cliente WHERE cli_id = " . $this->id;
             $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             while ($obj = mysql_fetch_object($con)) {
                 $id = $obj->cli_id;
-                $table = "mzt_cliente";
+                $table = "ass_cliente";
                 $arrfieldscomma = array(
                     'cli_nombre' => $this->nombre,
                     'cli_email' => $this->email,
@@ -75,7 +75,7 @@ class ControllerCustomer {
                 $arrjson = array('output' => array('valid' => true, 'id' => $id));
             }
         } else {
-            $q = "INSERT INTO mzt_cliente (cli_dtcreate, cli_nombre, cli_email, cli_nit, cli_telefono, cli_pais, cli_departamento, cli_ciudad, cli_direccion) VALUES (" . $this->UTILITY->date_now_server() . ", '$this->nombre', '$this->email', '$this->nit', '$this->telefono', '$this->pais', '$this->departamento', '$this->ciudad', '$this->direccion')";
+            $q = "INSERT INTO ass_cliente (cli_dtcreate, cli_nombre, cli_email, cli_nit, cli_telefono, cli_pais, cli_departamento, cli_ciudad, cli_direccion) VALUES (" . $this->UTILITY->date_now_server() . ", '$this->nombre', '$this->email', '$this->nit', '$this->telefono', '$this->pais', '$this->departamento', '$this->ciudad', '$this->direccion')";
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $id = mysql_insert_id();
             $arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -84,9 +84,9 @@ class ControllerCustomer {
     }
 
     public function cliget() {
-        $q = "SELECT * FROM mzt_cliente ORDER BY cli_nombre ASC";
+        $q = "SELECT * FROM ass_cliente ORDER BY cli_nombre ASC";
         if ($this->id > 0) {
-            $q = "SELECT * FROM mzt_cliente WHERE cli_id = " . $this->id;
+            $q = "SELECT * FROM ass_cliente WHERE cli_id = " . $this->id;
         }
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
@@ -119,7 +119,7 @@ class ControllerCustomer {
         $resultado = mysql_num_rows($con);
         if ($resultado == 0) { //Es que no había ningun contacto asociado a esta id de cliente
             if ($this->id > 0) {
-                $q = "DELETE FROM mzt_cliente WHERE cli_id = " . $this->id;
+                $q = "DELETE FROM ass_cliente WHERE cli_id = " . $this->id;
                 mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $arrjson = array('output' => array('valid' => true, 'id' => $this->id));
             } else {

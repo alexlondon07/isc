@@ -12,7 +12,7 @@ $tipo = '';
 $contenido = '';
 
 if ($ac != '' && $id > 0) {
-    $q = "SELECT * FROM mzt_archivos WHERE mzt_referencias_ref_id is null and mzt_ref_grupo_rfg_id is null and mzt_usuario_usr_id = " . $id;
+    $q = "SELECT * FROM ass_archivos WHERE mzt_usuario_usr_id = " . $id;
     $result = mysql_query($q, $conexion) or die("ERROR. ***isset***" . mysql_error());
     $resultado = mysql_num_rows($result);
         while ($rowSelect = mysql_fetch_object($result)) {

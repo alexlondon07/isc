@@ -40,11 +40,11 @@ $arrusuarios = $arrusuarios['output']['response'];
             <div class="container">
                 <h2>Usuarios</h2>
                 <?php
-                if ($create) {
+                //if ($create) {
                     ?>
                     <a href="#" id="crearusuario" class="btn btn-info botoncrear">Crear</a>
                     <?php
-                }
+                //}
                 ?>
                 <div>
                     <table class="table table-hover dyntable" id="dynamictable">

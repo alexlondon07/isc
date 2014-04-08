@@ -201,7 +201,7 @@ class ControllerUser {
                         $arrjson = array('output' => array('valid' => true, 'id' => $id));
                     }
                     //SE VERIFICA SI TIENE IMAGES ASOCIADA
-                    $q2 = "SELECT arc_id FROM mzt_archivos WHERE mzt_referencias_ref_id is null and mzt_ref_grupo_rfg_id is null and mzt_usuario_usr_id= '" . $keyid . "'";
+                    $q2 = "SELECT arc_id FROM ass_archivos WHERE mzt_usuario_usr_id= '" . $keyid . "'";
                     $con2 = mysql_query($q2, $this->conexion) or die(mysql_error() . "***ERROR: " . $q2);
                     $resultado2 = mysql_num_rows($con2);
                     $arr2 = array();
@@ -229,7 +229,7 @@ class ControllerUser {
                                 $contenido = addslashes($contenido);
                                 fclose($fp);
                                 if ($file_error == 0 && $file_size > 0 && $file_size < 14716800) {
-                                    $q = "INSERT INTO mzt_archivos (arc_nombre,arc_tipo,arc_contenido,arc_tamanio)VALUES('" . $file_name . "','" . $file_type . "','" . $contenido . "','" . $file_size . "')";
+                                    $q = "INSERT INTO ass_archivos (arc_nombre,arc_tipo,arc_contenido,arc_tamanio)VALUES('" . $file_name . "','" . $file_type . "','" . $contenido . "','" . $file_size . "')";
                                     mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                                     $idfile = mysql_insert_id();
                                     if ($idfile <= 0) {
@@ -237,7 +237,7 @@ class ControllerUser {
                                         //$this->response = $this->UTILITY->error_missing_data_file();
                                         return;
                                     } else {
-                                        $q3 = "UPDATE mzt_archivos SET arc_dtcreate = " . $this->UTILITY->date_now_server() . ",  mzt_usuario_usr_id = '" . $keyid . "' WHERE arc_id = " . $idfile . "";
+                                        $q3 = "UPDATE ass_archivos SET arc_dtcreate = " . $this->UTILITY->date_now_server() . ",  mzt_usuario_usr_id = '" . $keyid . "' WHERE arc_id = " . $idfile . "";
                                         mysql_query($q3, $this->conexion) or die(mysql_error() . "***ERROR: " . $q3);
                                     }
                                     header('Location: usuario.php');
@@ -266,7 +266,7 @@ class ControllerUser {
                                 $contenido = addslashes($contenido);
                                 fclose($fp);
                                 if ($file_error == 0 && $file_size > 0 && $file_size < 14716800) {
-                                    $q = "UPDATE mzt_archivos SET arc_nombre='" . $file_name . "' ,arc_tipo='" . $file_type . "',arc_contenido='" . $contenido . "',arc_tamanio='" . $file_size . "' WHERE arc_id =" . $id_archivo . "";
+                                    $q = "UPDATE ass_archivos SET arc_nombre='" . $file_name . "' ,arc_tipo='" . $file_type . "',arc_contenido='" . $contenido . "',arc_tamanio='" . $file_size . "' WHERE arc_id =" . $id_archivo . "";
                                     mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                                     $idfile = mysql_insert_id();
                                     if ($idfile <= 0) {
@@ -302,7 +302,7 @@ class ControllerUser {
                         $contenido = addslashes($contenido);
                         fclose($fp);
                         if ($file_error == 0 && $file_size > 0 && $file_size < 14716800) {
-                            $q = "INSERT INTO mzt_archivos (arc_nombre,arc_tipo,arc_contenido,arc_tamanio)VALUES('" . $file_name . "','" . $file_type . "','" . $contenido . "','" . $file_size . "')";
+                            $q = "INSERT INTO ass_archivos (arc_nombre,arc_tipo,arc_contenido,arc_tamanio)VALUES('" . $file_name . "','" . $file_type . "','" . $contenido . "','" . $file_size . "')";
                             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                             $idfile = mysql_insert_id();
                             if ($idfile <= 0) {
@@ -313,7 +313,7 @@ class ControllerUser {
                         }
                     } else {
                         //SI NO INGRESA FOTO SE LE ASIGNA UNA FOTO GENERICA
-                        $q_foto = " INSERT INTO `mzt_archivos` (mzt_usuario_usr_id,arc_dtcreate,arc_nombre,arc_tipo,arc_contenido,arc_encoding,arc_tamanio) VALUES (NULL, " . $this->UTILITY->date_now_server() . ", 'foto.jpg', 'image/jpeg', 0xffd8ffe1001845786966000049492a00080000000000000000000000ffec00114475636b7900010004000000500000ffe1036d687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f003c3f787061636b657420626567696e3d22efbbbf222069643d2257354d304d7043656869487a7265537a4e54637a6b633964223f3e203c783a786d706d65746120786d6c6e733a783d2261646f62653a6e733a6d6574612f2220783a786d70746b3d2241646f626520584d5020436f726520352e302d633036302036312e3133343737372c20323031302f30322f31322d31373a33323a30302020202020202020223e203c7264663a52444620786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e7323223e203c7264663a4465736372697074696f6e207264663a61626f75743d222220786d6c6e733a786d704d4d3d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f6d6d2f2220786d6c6e733a73745265663d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f73547970652f5265736f75726365526566232220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f2220786d704d4d3a4f726967696e616c446f63756d656e7449443d22786d702e6469643a39463834323732323245413145323131414544304132373636414130463246322220786d704d4d3a446f63756d656e7449443d22786d702e6469643a42354341423837454237463831314532383638444343364132413144303032352220786d704d4d3a496e7374616e636549443d22786d702e6969643a42354341423837444237463831314532383638444343364132413144303032352220786d703a43726561746f72546f6f6c3d2241646f62652050686f746f73686f70204353352057696e646f7773223e203c786d704d4d3a4465726976656446726f6d2073745265663a696e7374616e636549443d22786d702e6969643a4242343942464545463141314532313141384342384430324336463636344432222073745265663a646f63756d656e7449443d22786d702e6469643a3946383432373232324541314532313141454430413237363641413046324632222f3e203c2f7264663a4465736372697074696f6e3e203c2f7264663a5244463e203c2f783a786d706d6574613e203c3f787061636b657420656e643d2272223f3effee000e41646f62650064c000000001ffdb0084000202020202020202020203020202030403020203040504040404040506050505050505060607070807070609090a0a09090c0c0c0c0c0c0c0c0c0c0c0c0c0c0c01030303050405090606090d0b090b0d0f0e0e0e0e0f0f0c0c0c0c0c0f0f0c0c0c0c0c0c0f0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0cffc0001108004f004f03011100021101031101ffc4007a000002020301010000000000000000000000070608010205040301010000000000000000000000000000000010000102050202040c0600070000000000010203001104050706082131411277186171813213b53656b6d69738512214d49658c1722324343516110100000000000000000000000000000000ffda000c03010002110311003f00b3fb7adbd602bd602c1d79bce0ec7f76bbddb1fe99adbadd6b74cda9fa9a9a97ed54ce3cfbcf394ca5b8b716a2a52944924cc99c0383bb3edc3fafd8dbf8a59ff6b007767db87f5fb1b7f14b3fed60361b64db915a1beefb8d829ceaf567a52cfc7adc8ffc580e951ed3b6ff005efad8a6dbc6377034ff00a079effc9da3aa9333327fdaf212e301226f65fb7f586d4ee06c654a829529e2bd2b6852932519704d2cbcd00f38085b9b65db7256b4a3006375212a210a3a52ce0900c8197e97a6035eecfb70febf636fe2967fdac01dd9f6e1fd7ec6dfc52cff00b5804fe71dbd602b4e8bb2d55ab0763fb6553b9031ed13b5349a66d4cb8aa6add6566a5aa64a914c0943cc3ab69c4f25214a4a81492201c1b67fb70dbf766da53d4f4b00ed80ca44d40150483c0a8f21e38067698b326a2969dfad641551a94861464a43cd921c4281e90954e4478a027a869b6e7d442513249ea894c9e64ca03722700b9d59a7d2dd326aadd4edb4d30a52eb1b427f32bad292e7cccbf0805b4010092dc0fb0961ed2719fc73628036cff6e1b7eecdb4a7a9e9601db00403bf4c282ac76f294047fa642804f544c2882643f13012180203c3724a57415a85a8a50a61c0a5244c80526665d3015f4721004024b703ec2587b49c67f1cd8a00db3fdb86dfbb36d29ea7a58076c01e19ca5d3ca01e3a682c596de16dadb21be285924f9c6478f41e6203bf004078ae3d7fd1567a3f3fd02fa9c0ab8c8cb82789f24057ce448e523ca0080496e07d84b0f6938cfe39b1401b67fb70dbf766da53d4f4b00ed80201e9a72a535366a0587038a43296dc9742902441f0c077203101e6ad7d34d495150a5250196d4aeb28c8701c267c7015e4a8a895ab9ac951f2f18020125b81f612c3da4e33f8e6c5006d9fedc36fdd9b694f53d2c03b6008062683ae4a4d6dbd5c16b21f6bf02000950f1f280664010108d715c966dc8a21c5cac58329f242085132f1c84029a0080496e07d84b0f6938cfe39b1401b67fb70dbf766da53d4f4b00ed8020241a592b5dfade1048eaa94a578820ce01e100402935e095de9b89fcd4c0807fccae5010a8020125b81f612c3da4e33f8e6c5006d9fedc36fdd9b694f53d2c03b6032015109482a51e01204c9f10806a68cb3bd44d5455d6d37a17de212c85892c200e278f2993013b802022bab6d6e5c6da4d331e9aad85a56d0481d7291c14904f80ce5009c71a719596dd6d4d3839b6b0524790c0690092dc0fb0961ed2719fc736280fbed7a9aa2b36edb7ca7a565750f2f1b6949368133ff004f4bc4fe03c2602d25bb42d43a12e5caa0309e9a66a4a5f956780f203013ca0b25b2d807e92952db8260be7f33867ce6a3c603ac2008020080e7d75ae86e4dfa3aca74bd29f55444949f0850e22020d70d07e7b96ca99719a699ee5e20b1fe2202ae6e1ed370a7d1fa7285fa653550fe4cc64db215e6a94ad77624892b91e260395b57cfd8c6c1b71c0f66163c895170b663cd2f4b777adb8d35cdc69d552d5a2990e16ab28ec4f30fa3ac0f51c69c521499290a5248242c0f796c73d1a732afd27c87f2f4067bcb63af7732afd27c87f2f401de5b1d7bb9957e93e43f97a00ef2d8ebddccabf49f21fcbd007796c75eee655fa4f90fe5e803bcb63af7732afd27c87f2f401de5b1d7bb9957e93e43f97a031de5b1d7bb9957e93e43f97a0117b85dc1e3ebb686d394b4f61c90d3ed64cc675a9557632d7344828a2d7363aa752876aac4d214ea9b6941b6d27d23ab2969a4adc5a10a0fffd9, NULL, 2505)";
+                        $q_foto = " INSERT INTO `ass_archivos` (mzt_usuario_usr_id,arc_dtcreate,arc_nombre,arc_tipo,arc_contenido,arc_encoding,arc_tamanio) VALUES (NULL, " . $this->UTILITY->date_now_server() . ", 'foto.jpg', 'image/jpeg', 0xffd8ffe1001845786966000049492a00080000000000000000000000ffec00114475636b7900010004000000500000ffe1036d687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f003c3f787061636b657420626567696e3d22efbbbf222069643d2257354d304d7043656869487a7265537a4e54637a6b633964223f3e203c783a786d706d65746120786d6c6e733a783d2261646f62653a6e733a6d6574612f2220783a786d70746b3d2241646f626520584d5020436f726520352e302d633036302036312e3133343737372c20323031302f30322f31322d31373a33323a30302020202020202020223e203c7264663a52444620786d6c6e733a7264663d22687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e7323223e203c7264663a4465736372697074696f6e207264663a61626f75743d222220786d6c6e733a786d704d4d3d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f6d6d2f2220786d6c6e733a73745265663d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f73547970652f5265736f75726365526566232220786d6c6e733a786d703d22687474703a2f2f6e732e61646f62652e636f6d2f7861702f312e302f2220786d704d4d3a4f726967696e616c446f63756d656e7449443d22786d702e6469643a39463834323732323245413145323131414544304132373636414130463246322220786d704d4d3a446f63756d656e7449443d22786d702e6469643a42354341423837454237463831314532383638444343364132413144303032352220786d704d4d3a496e7374616e636549443d22786d702e6969643a42354341423837444237463831314532383638444343364132413144303032352220786d703a43726561746f72546f6f6c3d2241646f62652050686f746f73686f70204353352057696e646f7773223e203c786d704d4d3a4465726976656446726f6d2073745265663a696e7374616e636549443d22786d702e6969643a4242343942464545463141314532313141384342384430324336463636344432222073745265663a646f63756d656e7449443d22786d702e6469643a3946383432373232324541314532313141454430413237363641413046324632222f3e203c2f7264663a4465736372697074696f6e3e203c2f7264663a5244463e203c2f783a786d706d6574613e203c3f787061636b657420656e643d2272223f3effee000e41646f62650064c000000001ffdb0084000202020202020202020203020202030403020203040504040404040506050505050505060607070807070609090a0a09090c0c0c0c0c0c0c0c0c0c0c0c0c0c0c01030303050405090606090d0b090b0d0f0e0e0e0e0f0f0c0c0c0c0c0f0f0c0c0c0c0c0c0f0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0cffc0001108004f004f03011100021101031101ffc4007a000002020301010000000000000000000000070608010205040301010000000000000000000000000000000010000102050202040c0600070000000000010203001104050706082131411277186171813213b53656b6d69738512214d49658c1722324343516110100000000000000000000000000000000ffda000c03010002110311003f00b3fb7adbd602bd602c1d79bce0ec7f76bbddb1fe99adbadd6b74cda9fa9a9a97ed54ce3cfbcf394ca5b8b716a2a52944924cc99c0383bb3edc3fafd8dbf8a59ff6b007767db87f5fb1b7f14b3fed60361b64db915a1beefb8d829ceaf567a52cfc7adc8ffc580e951ed3b6ff005efad8a6dbc6377034ff00a079effc9da3aa9333327fdaf212e301226f65fb7f586d4ee06c654a829529e2bd2b6852932519704d2cbcd00f38085b9b65db7256b4a3006375212a210a3a52ce0900c8197e97a6035eecfb70febf636fe2967fdac01dd9f6e1fd7ec6dfc52cff00b5804fe71dbd602b4e8bb2d55ab0763fb6553b9031ed13b5349a66d4cb8aa6add6566a5aa64a914c0943cc3ab69c4f25214a4a81492201c1b67fb70dbf766da53d4f4b00ed80ca44d40150483c0a8f21e38067698b326a2969dfad641551a94861464a43cd921c4281e90954e4478a027a869b6e7d442513249ea894c9e64ca03722700b9d59a7d2dd326aadd4edb4d30a52eb1b427f32bad292e7cccbf0805b4010092dc0fb0961ed2719fc73628036cff6e1b7eecdb4a7a9e9601db00403bf4c282ac76f294047fa642804f544c2882643f13012180203c3724a57415a85a8a50a61c0a5244c80526665d3015f4721004024b703ec2587b49c67f1cd8a00db3fdb86dfbb36d29ea7a58076c01e19ca5d3ca01e3a682c596de16dadb21be285924f9c6478f41e6203bf004078ae3d7fd1567a3f3fd02fa9c0ab8c8cb82789f24057ce448e523ca0080496e07d84b0f6938cfe39b1401b67fb70dbf766da53d4f4b00ed80201e9a72a535366a0587038a43296dc9742902441f0c077203101e6ad7d34d495150a5250196d4aeb28c8701c267c7015e4a8a895ab9ac951f2f18020125b81f612c3da4e33f8e6c5006d9fedc36fdd9b694f53d2c03b6008062683ae4a4d6dbd5c16b21f6bf02000950f1f280664010108d715c966dc8a21c5cac58329f242085132f1c84029a0080496e07d84b0f6938cfe39b1401b67fb70dbf766da53d4f4b00ed8020241a592b5dfade1048eaa94a578820ce01e100402935e095de9b89fcd4c0807fccae5010a8020125b81f612c3da4e33f8e6c5006d9fedc36fdd9b694f53d2c03b6032015109482a51e01204c9f10806a68cb3bd44d5455d6d37a17de212c85892c200e278f2993013b802022bab6d6e5c6da4d331e9aad85a56d0481d7291c14904f80ce5009c71a719596dd6d4d3839b6b0524790c0690092dc0fb0961ed2719fc736280fbed7a9aa2b36edb7ca7a565750f2f1b6949368133ff004f4bc4fe03c2602d25bb42d43a12e5caa0309e9a66a4a5f956780f203013ca0b25b2d807e92952db8260be7f33867ce6a3c603ac2008020080e7d75ae86e4dfa3aca74bd29f55444949f0850e22020d70d07e7b96ca99719a699ee5e20b1fe2202ae6e1ed370a7d1fa7285fa653550fe4cc64db215e6a94ad77624892b91e260395b57cfd8c6c1b71c0f66163c895170b663cd2f4b777adb8d35cdc69d552d5a2990e16ab28ec4f30fa3ac0f51c69c521499290a5248242c0f796c73d1a732afd27c87f2f4067bcb63af7732afd27c87f2f401de5b1d7bb9957e93e43f97a00ef2d8ebddccabf49f21fcbd007796c75eee655fa4f90fe5e803bcb63af7732afd27c87f2f401de5b1d7bb9957e93e43f97a031de5b1d7bb9957e93e43f97a0117b85dc1e3ebb686d394b4f61c90d3ed64cc675a9557632d7344828a2d7363aa752876aac4d214ea9b6941b6d27d23ab2969a4adc5a10a0fffd9, NULL, 2505)";
                         $con_foto = mysql_query($q_foto, $this->conexion) or die(mysql_error() . "***ERROR: " . $q_foto);
                         $idfile = mysql_insert_id();
                         if ($idfile <= 0) {
@@ -344,7 +344,7 @@ class ControllerUser {
                     $id = mysql_insert_id();
 
                     //ACTUALIZO EL REGISTRO DE ARCHIVOS
-                    $q1 = "UPDATE mzt_archivos SET arc_dtcreate = " . $this->UTILITY->date_now_server() . ",  mzt_usuario_usr_id = '" . $id . "' WHERE arc_id = " . $idfile . "";
+                    $q1 = "UPDATE ass_archivos SET arc_dtcreate = " . $this->UTILITY->date_now_server() . ",  mzt_usuario_usr_id = '" . $id . "' WHERE arc_id = " . $idfile . "";
                     mysql_query($q1, $this->conexion) or die(mysql_error() . "***ERROR: " . $q1);
 
                     //$arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -391,7 +391,7 @@ class ControllerUser {
                 'dtcreate' => ($obj->usr_dtcreate));
         }
 //PEDIR ARCHIVOS
-        $qa = "SELECT arc_nombre FROM mzt_archivos WHERE mzt_referencias_ref_id is null and mzt_ref_grupo_rfg_id is null and mzt_usuario_usr_id= " . $this->id;
+        $qa = "SELECT arc_nombre FROM ass_archivos WHERE mzt_usuario_usr_id= " . $this->id;
         if ($qa != "") {
             $cona = mysql_query($qa, $this->conexion) or die(mysql_error() . "***ERROR: " . $qa);
             $resultadoa = mysql_num_rows($cona);
@@ -473,7 +473,7 @@ class ControllerUser {
     private function usrdelete() {
         if ($this->id > 0) {
             //actualiza la informacion
-            $q2 = "DELETE FROM mzt_archivos WHERE mzt_referencias_ref_id is null and mzt_ref_grupo_rfg_id is null and mzt_usuario_usr_id= '" . $this->id . "'";
+            $q2 = "DELETE FROM ass_archivos WHERE mzt_usuario_usr_id= '" . $this->id . "'";
             mysql_query($q2, $this->conexion) or die(mysql_error() . "***ERROR: " . $q2);
 
             $q = "DELETE FROM mzt_usuario WHERE usr_id = " . $this->id;
@@ -503,7 +503,7 @@ class ControllerUser {
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 while ($obj = mysql_fetch_object($con)) {
-                    $q2 = "SELECT cli_id, cli_nombre FROM mzt_cliente WHERE cli_id = " . $obj->mzt_cliente_cli_id;
+                    $q2 = "SELECT cli_id, cli_nombre FROM ass_cliente WHERE cli_id = " . $obj->mzt_cliente_cli_id;
                     $con2 = mysql_query($q2, $this->conexion) or die(mysql_error() . "***ERROR: " . $q2);
                     $cliente = '0';
                     $clientenombre = 'ninguno';

@@ -84,11 +84,11 @@ $arrusuarios = $arrusuarios['output']['response'];
                                                 <a href="#" onclick="USUARIO.deletedata(<?php echo $arrusuarios[$i]['id']; ?>);"><span class="icon-trash"></span></a>
                                                 <?php
                                             //}
-                                            if ($editpermission) {
+                                            //if ($editpermission) {
                                                 ?>
                                                 <a href="#" onclick="USUARIO.editpermission(<?php echo $arrusuarios[$i]['id']; ?>);"><span class="icon-ban-circle"></span></a>
                                                 <?php
-                                            }
+                                           // }
                                             ?>
                                             <a href="#" onclick="USUARIO.showuserdata(<?php echo $arrusuarios[$i]['id']; ?>);"><span class="icon-eye-open"></span></a>
                                             <a target="_blank" href="archivosverusuarios.php?ac=view&id=<?php echo $arrusuarios[$i]['id']; ?>"><span class="icon-zoom-in"></span></a><span>&nbsp;</span>

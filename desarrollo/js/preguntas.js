@@ -1,10 +1,10 @@
-$(document).on('ready', initpromotores);
+$(document).on('ready', initpreguntas);
 var q, pregunta, allFields, tips;
 
 /**
  * se activa para inicializar el documento
  */
-function initpromotores() {
+function initpreguntas() {
     q = {};
     q.ke = _ucode;
     q.lu = _ulcod;
@@ -24,7 +24,7 @@ function initpromotores() {
     });
 
     $("#dialog-form").dialog({
-        autoOpen: false, height: 690, width: 550, modal: true,
+        autoOpen: false, height: 500, width: 550, modal: true,
         buttons: {
             "Guardar": function() {
                 var bValid = true;
@@ -44,7 +44,7 @@ function initpromotores() {
         }
     });
     $("#dialog-formsc").dialog({
-        autoOpen: false, height: 600, width: 450, modal: true,
+        autoOpen: false, height: 500, width: 450, modal: true,
         buttons: {
             "Cancelar": function() {
                 $(this).dialog("close");

@@ -32,6 +32,7 @@ include 'include/generic_validate_session.php';
                         <thead>
                             <tr>
                                 <th class="head0" style="width: 70px;">Acciones</th>
+                                <th class="head1">Criterio</th>
                                 <th class="head1">Pregunta</th>
                                 <th class="head0">Valor</th>
                                 <th class="head1">Pregunta Activa</th>
@@ -43,6 +44,7 @@ include 'include/generic_validate_session.php';
                             <col class="con1" />
                             <col class="con0" />
                             <col class="con1" />
+                            <col class="con0" />
                             <col class="con0" />
                         </colgroup>
                         <tbody>
@@ -60,8 +62,18 @@ include 'include/generic_validate_session.php';
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
                 <div class="control-group">
+                    <label class="control-label">Criterio</label>
+                    <div class="controls">
+                        <select name="id_criterio" id="id_criterio" class="text ui-widget-content ui-corner-all">
+                            <option value="selecione">Seleccione Criterio</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label class="control-label">Pregunta</label>
-                    <div class="controls"><input type="text" name="pregunta" id="pregunta" class="text ui-widget-content ui-corner-all" /></div>
+                    <div class="controls">
+                        <textarea style="margin: 0px; height: 135px; width: 280px;" name="pregunta" id="pregunta" class="text ui-widget-content ui-corner-all"></textarea>
+                    </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Valor</label>
@@ -76,15 +88,15 @@ include 'include/generic_validate_session.php';
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Pregunta Abierta</label>
-                    <div class="controls">
-                        <select name="preg_activa" id="preg_activa" class="text ui-widget-content ui-corner-all">
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </div>
+                <!--                <div class="control-group">
+                                    <label class="control-label">Pregunta Abierta</label>
+                                    <div class="controls">
+                                        <select name="preg_activa" id="preg_activa" class="text ui-widget-content ui-corner-all">
+                                            <option value="si">Sí</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                </div>-->
             </form>
         </div>
 
@@ -92,8 +104,12 @@ include 'include/generic_validate_session.php';
             <p class="validateTips"></p>
             <form class="form-horizontal" id="formcreate">
                 <div class="control-group">
-                    <label class="control-label">Nombre</label>
-                    <div class="controls"><input readonly type="text" name="nombresc" id="nombresc" class="text ui-widget-content ui-corner-all" /></div>
+                    <label class="control-label">Criterio</label>
+                    <div class="controls"><input readonly type="text" name="id_criteriosc" id="id_criteriosc" class="text ui-widget-content ui-corner-all" /></div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Pregunta</label>
+                    <div class="controls"><input readonly type="text" name="preguntasc" id="preguntasc" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Valor</label>
@@ -103,10 +119,10 @@ include 'include/generic_validate_session.php';
                     <label class="control-label">Pregunta Activa</label>
                     <div class="controls"><input readonly type="text" name="estadosc" id="estadosc" class="text ui-widget-content ui-corner-all" /></div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Pregunta Abierta</label>
-                    <div class="controls"><input readonly type="text" name="preg_activasc" id="preg_activasc" class="text ui-widget-content ui-corner-all" /></div>
-                </div>
+                <!--                <div class="control-group">
+                                    <label class="control-label">Pregunta Abierta</label>
+                                    <div class="controls"><input readonly type="text" name="preg_activasc" id="preg_activasc" class="text ui-widget-content ui-corner-all" /></div>
+                                </div>-->
             </form>
         </div>
         <?php include 'include/generic_script.php'; ?>

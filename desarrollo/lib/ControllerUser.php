@@ -101,19 +101,19 @@ class ControllerUser {
         } else {
             if ($this->id > 0) {
                 //se verifica que el email está disponible
-                $q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $this->id ";
+                $q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $this->id ";
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 if ($resultado == 0) {
                     //actualiza la informacion
-                    $q = "SELECT usr_id FROM mzt_usuario WHERE usr_id = " . $this->id;
+                    $q = "SELECT usr_id FROM ass_usuario WHERE usr_id = " . $this->id;
                     $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                     while ($obj = mysql_fetch_object($con)) {
                         $id = $obj->usr_id;
                         if (strlen($this->pass) > 2) {
                             $pass = $this->UTILITY->make_hash_pass($this->email, $this->pass);
                         }
-                        $table = "mzt_usuario";
+                        $table = "ass_usuario";
                         $arrfieldscomma = array(
                             'usr_nombre' => $this->nombre,
                             'usr_apellido' => $this->apellido,
@@ -135,7 +135,7 @@ class ControllerUser {
                 }
             } else {
                 //se verifica que el email está disponible
-                $q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "'";
+                $q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "'";
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 if ($resultado == 0) {
@@ -143,7 +143,7 @@ class ControllerUser {
                         $pass = $this->UTILITY->make_hash_pass($this->email, $this->pass);
                     }
                     $this->pass = $pass;
-                    $q = "INSERT INTO mzt_usuario (usr_dtcreate, mzt_cliente_cli_id, mzt_proveedor_pro_id, usr_habilitado, usr_nombre, usr_apellido, usr_cargo, usr_email, usr_pass, usr_identificacion, usr_celular, usr_telefono, usr_contacto) VALUES (" . $this->UTILITY->date_now_server() . ", $this->idcli, $this->idprov, '$this->habilitado', '$this->nombre', '$this->apellido', '$this->cargo', '$this->email', '$this->pass', '$this->identificacion', '$this->celular', '$this->telefono', '$this->contacto')";
+                    $q = "INSERT INTO ass_usuario (usr_dtcreate, mzt_cliente_cli_id, mzt_proveedor_pro_id, usr_habilitado, usr_nombre, usr_apellido, usr_cargo, usr_email, usr_pass, usr_identificacion, usr_celular, usr_telefono, usr_contacto) VALUES (" . $this->UTILITY->date_now_server() . ", $this->idcli, $this->idprov, '$this->habilitado', '$this->nombre', '$this->apellido', '$this->cargo', '$this->email', '$this->pass', '$this->identificacion', '$this->celular', '$this->telefono', '$this->contacto')";
                     mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                     $id = mysql_insert_id();
                     $arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -167,12 +167,12 @@ class ControllerUser {
         } else {
             if ($keyid > 0) {
                 //se verifica que el email está disponible
-                $q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $keyid ";
+                $q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $keyid ";
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 if ($resultado == 0) {
                     //actualiza la informacion
-                    $q = "SELECT usr_id FROM mzt_usuario WHERE usr_id = " . $keyid;
+                    $q = "SELECT usr_id FROM ass_usuario WHERE usr_id = " . $keyid;
                     $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                     while ($obj = mysql_fetch_object($con)) {
                         $id = $obj->usr_id;
@@ -183,7 +183,7 @@ class ControllerUser {
                             $pass = $this->UTILITY->make_hash_pass($this->email, $pass1);
                         }
                         $this->pass = $pass;
-                        $table = "mzt_usuario";
+                        $table = "ass_usuario";
                         $arrfieldscomma = array(
                             'usr_nombre' => $this->nombre,
                             'usr_apellido' => $this->apellido,
@@ -327,7 +327,7 @@ class ControllerUser {
                     //return;
                 }
                 //se verifica que el email está disponible
-                $q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "'";
+                $q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "'";
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 if ($resultado == 0) {
@@ -338,7 +338,7 @@ class ControllerUser {
                         $pass = $this->UTILITY->make_hash_pass($this->email, $pass1);
                     }
                     $this->pass = $pass;
-                    $q = "INSERT INTO mzt_usuario (usr_dtcreate, mzt_cliente_cli_id, mzt_proveedor_pro_id, usr_habilitado, usr_nombre, usr_apellido, usr_cargo, usr_email, usr_pass, usr_identificacion, usr_celular, usr_telefono, usr_contacto) 
+                    $q = "INSERT INTO ass_usuario (usr_dtcreate, mzt_cliente_cli_id, mzt_proveedor_pro_id, usr_habilitado, usr_nombre, usr_apellido, usr_cargo, usr_email, usr_pass, usr_identificacion, usr_celular, usr_telefono, usr_contacto) 
                         VALUES (" . $this->UTILITY->date_now_server() . ", $this->idcli, $this->idprov, '$this->habilitado', '$this->nombre', '$this->apellido', '$this->cargo', '$this->email', '$this->pass', '$this->identificacion', '$this->celular', '$this->telefono','no')";
                     mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                     $id = mysql_insert_id();
@@ -360,11 +360,11 @@ class ControllerUser {
         header('Location: usuario.php');
     }
 
-//$q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $this->id ";
+//$q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "' AND usr_id != $this->id ";
     public function usrget() {
-        $q = "SELECT * FROM mzt_usuario WHERE usr_contacto='no' ORDER BY usr_nombre ASC";
+        $q = "SELECT * FROM ass_usuario WHERE usr_contacto='no' ORDER BY usr_nombre ASC";
         if ($this->id > 0) {
-            $q = "SELECT * FROM mzt_usuario WHERE usr_contacto='no' AND usr_id = " . $this->id;
+            $q = "SELECT * FROM ass_usuario WHERE usr_contacto='no' AND usr_id = " . $this->id;
         }
         //if ($this->sdid > 0) {
         //    $q = "SELECT * FROM fir_usuario WHERE fir_sede_sde_id = " . $this->sdid;
@@ -409,11 +409,11 @@ class ControllerUser {
         $this->response = ($arrjson);
     }
 
-    // $q = "SELECT usr_id FROM mzt_usuario WHERE usr_email = '" . $this->email . "' AND 
+    // $q = "SELECT usr_id FROM ass_usuario WHERE usr_email = '" . $this->email . "' AND 
     public function contactget() {
-        $q = "SELECT * FROM mzt_usuario WHERE usr_contacto='si' AND mzt_cliente_cli_id ='" . $this->idcli . "' ORDER BY usr_nombre ASC";
+        $q = "SELECT * FROM ass_usuario WHERE usr_contacto='si' AND mzt_cliente_cli_id ='" . $this->idcli . "' ORDER BY usr_nombre ASC";
         if ($this->id > 0) {
-            $q = "SELECT * FROM mzt_usuario WHERE usr_id = " . $this->id;
+            $q = "SELECT * FROM ass_usuario WHERE usr_id = " . $this->id;
         }
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
@@ -441,9 +441,9 @@ class ControllerUser {
     }
 
     public function contprovget() {
-        $q = "SELECT * FROM mzt_usuario WHERE usr_contacto='si' AND mzt_proveedor_pro_id ='" . $this->idprov . "' ORDER BY usr_nombre ASC";
+        $q = "SELECT * FROM ass_usuario WHERE usr_contacto='si' AND mzt_proveedor_pro_id ='" . $this->idprov . "' ORDER BY usr_nombre ASC";
         if ($this->id > 0) {
-            $q = "SELECT * FROM mzt_usuario WHERE usr_id = " . $this->id;
+            $q = "SELECT * FROM ass_usuario WHERE usr_id = " . $this->id;
         }
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
@@ -476,7 +476,7 @@ class ControllerUser {
             $q2 = "DELETE FROM ass_archivos WHERE mzt_usuario_usr_id= '" . $this->id . "'";
             mysql_query($q2, $this->conexion) or die(mysql_error() . "***ERROR: " . $q2);
 
-            $q = "DELETE FROM mzt_usuario WHERE usr_id = " . $this->id;
+            $q = "DELETE FROM ass_usuario WHERE usr_id = " . $this->id;
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $arrjson = array('output' => array('valid' => true, 'id' => $this->id));
         } else {
@@ -499,7 +499,7 @@ class ControllerUser {
                 $pass = $this->UTILITY->make_hash_pass($this->email, $this->pass);
 //                echo 'este el clave' .$pass;
 //                exit();
-                $q = "SELECT * FROM mzt_usuario WHERE usr_email = '$this->email' AND usr_pass = '$pass' AND usr_habilitado = 'si'";
+                $q = "SELECT * FROM ass_usuario WHERE usr_email = '$this->email' AND usr_pass = '$pass' AND usr_habilitado = 'si'";
                 $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $resultado = mysql_num_rows($con);
                 while ($obj = mysql_fetch_object($con)) {

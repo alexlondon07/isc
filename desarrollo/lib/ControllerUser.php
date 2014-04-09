@@ -513,7 +513,7 @@ class ControllerUser {
                     }
 
                     //se consultan los perfiles asignados
-                    $q3 = "SELECT mzt_perfiles_prf_id FROM mzt_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = $obj->usr_id ORDER BY mzt_perfiles_prf_id ASC";
+                    $q3 = "SELECT mzt_perfiles_prf_id FROM ass_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = $obj->usr_id ORDER BY mzt_perfiles_prf_id ASC";
                     $con3 = mysql_query($q3, $this->conexion) or die(mysql_error() . "***ERROR: " . $q3);
                     $arrassigned = array();
                     while ($obj3 = mysql_fetch_object($con3)) {
@@ -545,7 +545,7 @@ class ControllerUser {
 
     private function usrprfget() {
         //se consultan los perfiles asignados
-        $q = "SELECT * FROM mzt_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = $this->id ORDER BY mzt_perfiles_prf_id ASC";
+        $q = "SELECT * FROM ass_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = $this->id ORDER BY mzt_perfiles_prf_id ASC";
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $arrassigned = array();
         $arravailable = array();
@@ -553,7 +553,7 @@ class ControllerUser {
             $arrassigned[] = array('id' => $obj->mzt_perfiles_prf_id);
         }
         //se consultan los perfiles disponibles
-        $q = "SELECT * FROM mzt_perfiles ORDER BY prf_nombre ASC";
+        $q = "SELECT * FROM ass_perfiles ORDER BY prf_nombre ASC";
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         while ($obj = mysql_fetch_object($con)) {
             $arravailable[] = array(
@@ -569,13 +569,13 @@ class ControllerUser {
     private function usrprfsave() {
         if ($this->id > 0) {
             //actualiza la informacion
-            $q = "DELETE FROM mzt_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = " . $this->id;
+            $q = "DELETE FROM ass_usuario_has_mzt_perfiles WHERE mzt_usuario_usr_id = " . $this->id;
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $arrchk = explode('-', $this->chk);
             for ($i = 0; $i < count($arrchk); $i++) {
                 $prf_id = intval($arrchk[$i]);
                 if ($prf_id > 0) {
-                    $q = "INSERT INTO mzt_usuario_has_mzt_perfiles (mzt_usuario_usr_id, mzt_perfiles_prf_id) VALUES ($this->id, $prf_id)";
+                    $q = "INSERT INTO ass_usuario_has_mzt_perfiles (mzt_usuario_usr_id, mzt_perfiles_prf_id) VALUES ($this->id, $prf_id)";
                     mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 }
             }

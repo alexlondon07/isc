@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Servidor: localhost
--- Tiempo de generación: 09-04-2014 a las 17:14:21
+-- Tiempo de generación: 09-04-2014 a las 17:29:49
 -- Versión del servidor: 5.0.51
 -- Versión de PHP: 5.2.6
 
@@ -66,10 +66,10 @@ INSERT INTO `ass_cliente` VALUES (1, '2013-05-14 21:17:41', 'Secuencia24', '5646
 -- --------------------------------------------------------
 
 -- 
--- Estructura de tabla para la tabla `mzt_perfiles`
+-- Estructura de tabla para la tabla `ass_perfiles`
 -- 
 
-CREATE TABLE `mzt_perfiles` (
+CREATE TABLE `ass_perfiles` (
   `prf_id` int(11) NOT NULL auto_increment,
   `prf_nombre` varchar(45) NOT NULL,
   `prf_descripcion` varchar(45) default NULL,
@@ -77,26 +77,26 @@ CREATE TABLE `mzt_perfiles` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
 
 -- 
--- Volcar la base de datos para la tabla `mzt_perfiles`
+-- Volcar la base de datos para la tabla `ass_perfiles`
 -- 
 
-INSERT INTO `mzt_perfiles` VALUES (1, 'Clientes - Ver', NULL);
-INSERT INTO `mzt_perfiles` VALUES (2, 'Clientes - Crear', NULL);
-INSERT INTO `mzt_perfiles` VALUES (3, 'Clientes - Editar', NULL);
-INSERT INTO `mzt_perfiles` VALUES (4, 'Clientes - Eliminar', NULL);
-INSERT INTO `mzt_perfiles` VALUES (5, 'Usuarios - Ver', NULL);
-INSERT INTO `mzt_perfiles` VALUES (6, 'Usuarios - Crear', NULL);
-INSERT INTO `mzt_perfiles` VALUES (7, 'Usuarios - Editar', NULL);
-INSERT INTO `mzt_perfiles` VALUES (8, 'Usuarios - Eliminar', NULL);
-INSERT INTO `mzt_perfiles` VALUES (9, 'Usuarios - Permisos', NULL);
+INSERT INTO `ass_perfiles` VALUES (1, 'Clientes - Ver', NULL);
+INSERT INTO `ass_perfiles` VALUES (2, 'Clientes - Crear', NULL);
+INSERT INTO `ass_perfiles` VALUES (3, 'Clientes - Editar', NULL);
+INSERT INTO `ass_perfiles` VALUES (4, 'Clientes - Eliminar', NULL);
+INSERT INTO `ass_perfiles` VALUES (5, 'Usuarios - Ver', NULL);
+INSERT INTO `ass_perfiles` VALUES (6, 'Usuarios - Crear', NULL);
+INSERT INTO `ass_perfiles` VALUES (7, 'Usuarios - Editar', NULL);
+INSERT INTO `ass_perfiles` VALUES (8, 'Usuarios - Eliminar', NULL);
+INSERT INTO `ass_perfiles` VALUES (9, 'Usuarios - Permisos', NULL);
 
 -- --------------------------------------------------------
 
 -- 
--- Estructura de tabla para la tabla `mzt_usuario`
+-- Estructura de tabla para la tabla `ass_usuario`
 -- 
 
-CREATE TABLE `mzt_usuario` (
+CREATE TABLE `ass_usuario` (
   `usr_id` int(11) NOT NULL auto_increment,
   `mzt_cliente_cli_id` int(11) default NULL,
   `mzt_proveedor_pro_id` int(11) default NULL,
@@ -115,43 +115,33 @@ CREATE TABLE `mzt_usuario` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=163 ;
 
 -- 
--- Volcar la base de datos para la tabla `mzt_usuario`
+-- Volcar la base de datos para la tabla `ass_usuario`
 -- 
 
-INSERT INTO `mzt_usuario` VALUES (1, 1, NULL, '2013-05-14 21:17:41', 'prueba', 'apellido_prueba', 'testing', '123456789', 'prueba@correo.com', 'FFBD0559E3ABCC2F532962E1BD4DDC7AC101CB04', '654987321', '321654987', 'si', 'no');
-INSERT INTO `mzt_usuario` VALUES (162, 1, NULL, '2014-04-08 12:44:36', 'Alex', 'LondoÃ±o', 'Ingeniero', '231', 'alex@prueba.com', '', '123', '123', 'no', 'si');
+INSERT INTO `ass_usuario` VALUES (1, 1, NULL, '2013-05-14 21:17:41', 'prueba', 'apellido_prueba', 'testing', '123456789', 'prueba@correo.com', 'FFBD0559E3ABCC2F532962E1BD4DDC7AC101CB04', '654987321', '321654987', 'si', 'no');
 
 -- --------------------------------------------------------
 
 -- 
--- Estructura de tabla para la tabla `mzt_usuario_has_mzt_perfiles`
+-- Estructura de tabla para la tabla `ass_usuario_has_mzt_perfiles`
 -- 
 
-CREATE TABLE `mzt_usuario_has_mzt_perfiles` (
+CREATE TABLE `ass_usuario_has_mzt_perfiles` (
   `mzt_usuario_usr_id` int(11) NOT NULL,
   `mzt_perfiles_prf_id` int(11) NOT NULL,
   PRIMARY KEY  (`mzt_usuario_usr_id`,`mzt_perfiles_prf_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- 
--- Volcar la base de datos para la tabla `mzt_usuario_has_mzt_perfiles`
+-- Volcar la base de datos para la tabla `ass_usuario_has_mzt_perfiles`
 -- 
 
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 1);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 2);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 3);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 4);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 5);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 6);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 7);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 8);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 9);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 10);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 11);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 12);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 13);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 14);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 15);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 16);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 17);
-INSERT INTO `mzt_usuario_has_mzt_perfiles` VALUES (1, 18);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 1);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 2);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 3);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 4);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 5);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 6);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 7);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 8);
+INSERT INTO `ass_usuario_has_mzt_perfiles` VALUES (1, 9);

@@ -19,7 +19,7 @@ include 'include/generic_validate_session.php';
             include 'include/generic_navbar.php';
             ?>
             <div class="container">
-                <h2>Preguntas</h2>
+                <h2>Códigos</h2>
                 <?php
                 //if ($create) {
                 ?>
@@ -32,19 +32,13 @@ include 'include/generic_validate_session.php';
                         <thead>
                             <tr>
                                 <th class="head0" style="width: 70px;">Acciones</th>
-                                <th class="head1">Criterio</th>
-                                <th class="head1">Pregunta</th>
-                                <th class="head0">Valor</th>
-                                <th class="head1">Pregunta Activa</th>
-                                <th class="head1">Pregunta Abierta</th>
+                                <th class="head1">Promotor</th>
+                                <th class="head1">Cliente</th>
                             </tr>
                         </thead>
                         <colgroup>
                             <col class="con0" />
                             <col class="con1" />
-                            <col class="con0" />
-                            <col class="con1" />
-                            <col class="con0" />
                             <col class="con0" />
                         </colgroup>
                         <tbody>
